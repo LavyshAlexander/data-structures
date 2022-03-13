@@ -15,6 +15,8 @@ func main() {
 	l.Append(42)
 	fmt.Println(l)
 
+	fmt.Println("Is there value equals 42?", l.Exist(42))
+
 	err := l.Delete(42)
 	fmt.Println(l, err)
 
