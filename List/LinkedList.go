@@ -1,34 +1,84 @@
-package List
+package list
 
-import "fmt"
+import (
+	"fmt"
+)
 
-type List interface {
-	Append(value int)
-	Delete(index int) error
-	Find(value int) (List, int)
-	Length() int
+type LinkedListNode struct {
+	Value int
+	Next  *LinkedListNode
 }
 
 type LinkedList struct {
-	Value int
-	Next  *LinkedList
+	Head *LinkedListNode
+	Tail *LinkedListNode
 }
 
 func (l *LinkedList) Append(value int) {
-	for l.Next != nil {
-		l = l.Next
+	node := &LinkedListNode{Value: value}
+
+	if l.Head == nil {
+		l.Head = node
+		l.Tail = node
+
+		return
 	}
 
-	l.Next = &LinkedList{Value: value}
+	l.Tail.Next = node
+	l.Tail = node
+}
+
+func (l *LinkedList) Prepend(value int) {
+	node := &LinkedListNode{Value: value}
+
+	node.Next = l.Head
+	l.Head = node
+
+	if l.Tail == nil {
+		l.Tail = node
+	}
+}
+
+func (l *LinkedList) Delete(value int) bool {
+	node := l.Head
+
+	if node == nil {
+		return false
+	}
+
+	if node.Value == value {
+		l.Head = node.Next
+		return true
+	}
+
+	prev := node
+	node = node.Next
+	for node != nil {
+		if node.Value == value {
+			prev.Next = node.Next
+			return true
+		}
+
+		prev = node
+		node = node.Next
+	}
+
+	return false
 }
 
 func (l *LinkedList) String() string {
-	str := "["
-	for l.Next != nil {
-		str += fmt.Sprintf("%v ", l.Value)
-		l = l.Next
+	if l.Head == nil {
+		return "[]"
 	}
-	str += fmt.Sprint(l.Value) + "]"
+
+	node := l.Head
+
+	str := "[ "
+	for node != nil {
+		str += fmt.Sprintf("%v ", node.Value)
+		node = node.Next
+	}
+	str += "]"
 
 	return str
 }
