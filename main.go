@@ -13,7 +13,7 @@ func main() {
 	l.Append(20)
 	l.Append(30)
 	l.Append(42)
-	fmt.Println(l)
+	fmt.Println(l, "with length:", l.Length())
 
 	fmt.Println("Is there value equals 42?", l.Exist(42))
 
