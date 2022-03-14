@@ -83,6 +83,12 @@ func (l *DoublyLinkedList) Exist(value int) bool {
 
 func (l *DoublyLinkedList) Length() int {
 	length := 0
+	node := l.Head
+
+	for node != nil {
+		length++
+		node = node.Next
+	}
 
 	return length
 }

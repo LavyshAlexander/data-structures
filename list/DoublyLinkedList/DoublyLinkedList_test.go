@@ -87,6 +87,13 @@ func TestLength(t *testing.T) {
 	if length != 3 {
 		t.Errorf("got length %v, wanted %v", length, 3)
 	}
+
+	list.Delete(20)
+	length = list.Length()
+
+	if length != 2 {
+		t.Errorf("got length %v, wanted %v", length, 3)
+	}
 }
 
 func TestDelete(t *testing.T) {
