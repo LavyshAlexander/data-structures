@@ -40,6 +40,29 @@ func (l *DoublyLinkedList) Prepend(value int) {
 }
 
 func (l *DoublyLinkedList) Delete(value int) bool {
+	node := l.Head
+
+	if node == nil {
+		return false
+	}
+
+	if node.Value == value {
+		l.Head = node.Next
+		node.Previous = nil
+		return true
+	}
+
+	node = node.Next
+
+	for node != nil {
+		if node.Value == value {
+			node.Previous.Next = node.Next
+			node.Next.Previous = node.Previous
+			return true
+		}
+
+		node = node.Next
+	}
 
 	return false
 }
