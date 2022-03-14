@@ -47,7 +47,13 @@ func (l *LinkedList) Delete(value int) bool {
 	}
 
 	if node.Value == value {
-		l.Head = node.Next
+		if l.Head == l.Tail {
+			l.Head = nil
+			l.Tail = nil
+		} else {
+			l.Head = node.Next
+		}
+
 		return true
 	}
 
