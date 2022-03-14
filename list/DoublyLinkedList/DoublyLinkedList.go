@@ -20,8 +20,8 @@ func (l *DoublyLinkedList) Append(value int) {
 		l.Head = node
 		l.Tail = node
 	} else {
-		l.Tail.Next = node
 		node.Previous = l.Tail
+		l.Tail.Next = node
 		l.Tail = node
 	}
 }
