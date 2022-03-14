@@ -38,6 +38,43 @@ func TestAppend(t *testing.T) {
 	}
 }
 
+func TestPrepend(t *testing.T) {
+	list := LinkedList{}
+
+	list.Prepend(10)
+	list.Prepend(20)
+	list.Prepend(30)
+
+	first := list.Head.Value
+	second := list.Head.Next.Value
+	third := list.Head.Next.Next.Value
+	end := list.Head.Next.Next.Next
+	tail := list.Tail.Value
+
+	firstExpected := 30
+	if first != firstExpected {
+		t.Errorf("in first node got %v, wanted %v", first, firstExpected)
+	}
+
+	secondExpected := 20
+	if second != secondExpected {
+		t.Errorf("in second node got %v, wanted %v", second, secondExpected)
+	}
+
+	thirdExpected := 10
+	if third != thirdExpected {
+		t.Errorf("in third node got %v, wanted %v", third, thirdExpected)
+	}
+
+	if end != nil {
+		t.Errorf("in end got %v, wanted %v", end, nil)
+	}
+
+	if tail != thirdExpected {
+		t.Errorf("in tail got %v, wanted %v", first, thirdExpected)
+	}
+}
+
 func TestLength(t *testing.T) {
 	list := LinkedList{}
 
