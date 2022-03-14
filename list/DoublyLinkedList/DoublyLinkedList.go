@@ -68,6 +68,15 @@ func (l *DoublyLinkedList) Delete(value int) bool {
 }
 
 func (l *DoublyLinkedList) Exist(value int) bool {
+	node := l.Head
+
+	for node != nil {
+		if node.Value == value {
+			return true
+		}
+
+		node = node.Next
+	}
 
 	return false
 }

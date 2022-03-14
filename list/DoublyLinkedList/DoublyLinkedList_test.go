@@ -161,6 +161,14 @@ func TestString(t *testing.T) {
 		t.Errorf("got %v, wanted %v", stringValue, expectedString)
 	}
 
+	list.Delete(20)
+	stringValue = list.String()
+	expectedString = "[ 10 30 ]"
+
+	if stringValue != expectedString {
+		t.Errorf("got %v, wanted %v", stringValue, expectedString)
+	}
+
 	emptyString := DoublyLinkedList{}
 
 	stringValue = emptyString.String()
