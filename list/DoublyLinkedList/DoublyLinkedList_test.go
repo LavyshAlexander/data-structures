@@ -1,4 +1,4 @@
-package DoubleLinkedList
+package DoublyLinkedList
 
 import (
 	"testing"

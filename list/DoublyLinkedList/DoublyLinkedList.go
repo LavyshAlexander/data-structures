@@ -1,4 +1,4 @@
-package DoubleLinkedList
+package DoublyLinkedList
 
 import "fmt"
 
@@ -14,7 +14,16 @@ type DoublyLinkedList struct {
 }
 
 func (l *DoublyLinkedList) Append(value int) {
+	node := &DoublyLinkedListNode{Value: value}
 
+	if l.Head == nil {
+		l.Head = node
+		l.Tail = node
+	} else {
+		l.Tail.Next = node
+		node.Previous = l.Tail
+		l.Tail = node
+	}
 }
 
 func (l *DoublyLinkedList) Prepend(value int) {
