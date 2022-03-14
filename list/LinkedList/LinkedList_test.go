@@ -121,6 +121,23 @@ func TestDelete(t *testing.T) {
 	}
 }
 
+func TestDeleteSingleHead(t *testing.T) {
+	list := LinkedList{}
+
+	list.Append(10)
+	list.Delete(10)
+
+	head := list.Head
+	if head != nil {
+		t.Errorf("in head node got %v, wanted %v", head, nil)
+	}
+
+	tail := list.Tail
+	if list.Tail != nil {
+		t.Errorf("in tail node got %v, wanted %v", tail, nil)
+	}
+}
+
 func TestExist(t *testing.T) {
 	list := LinkedList{}
 
