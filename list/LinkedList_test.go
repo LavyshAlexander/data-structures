@@ -146,3 +146,27 @@ func TestExist(t *testing.T) {
 		t.Errorf("got %v, wanted %v", nonExistedValueCheck, false)
 	}
 }
+
+func TestString(t *testing.T) {
+	list := LinkedList{}
+
+	list.Append(10)
+	list.Append(20)
+	list.Append(30)
+
+	stringValue := list.String()
+	expectedString := "[ 10 20 30 ]"
+
+	if stringValue != expectedString {
+		t.Errorf("got %v, wanted %v", stringValue, expectedString)
+	}
+
+	emptyString := LinkedList{}
+
+	stringValue = emptyString.String()
+	expectedString = "[]"
+
+	if stringValue != expectedString {
+		t.Errorf("got %v, wanted %v", stringValue, expectedString)
+	}
+}
