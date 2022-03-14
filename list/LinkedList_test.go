@@ -120,3 +120,29 @@ func TestDelete(t *testing.T) {
 		t.Errorf("in tail got %v, wanted %v", tail, secondExpected)
 	}
 }
+
+func TestExist(t *testing.T) {
+	list := LinkedList{}
+
+	list.Append(10)
+	list.Append(20)
+	list.Append(30)
+
+	firstExpected := 10
+	isFirstExist := list.Exist(firstExpected)
+	if !isFirstExist {
+		t.Errorf("got %v, wanted %v", isFirstExist, true)
+	}
+
+	tailExpected := 30
+	isTailExist := list.Exist(tailExpected)
+	if !isTailExist {
+		t.Errorf("got %v, wanted %v", isTailExist, true)
+	}
+
+	notExistedValue := 42
+	nonExistedValueCheck := list.Exist(notExistedValue)
+	if nonExistedValueCheck {
+		t.Errorf("got %v, wanted %v", nonExistedValueCheck, false)
+	}
+}
