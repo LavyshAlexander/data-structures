@@ -27,7 +27,16 @@ func (l *DoublyLinkedList) Append(value int) {
 }
 
 func (l *DoublyLinkedList) Prepend(value int) {
+	node := &DoublyLinkedListNode{Value: value}
 
+	if l.Head == nil {
+		l.Head = node
+		l.Tail = node
+	} else {
+		node.Next = l.Head
+		l.Head.Previous = node
+		l.Head = node
+	}
 }
 
 func (l *DoublyLinkedList) Delete(value int) bool {
