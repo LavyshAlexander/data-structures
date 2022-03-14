@@ -34,7 +34,7 @@ func TestAppend(t *testing.T) {
 	}
 
 	if tail != 30 {
-		t.Errorf("in tail got %v, wanted %v", first, 30)
+		t.Errorf("in tail got %v, wanted %v", tail, 30)
 	}
 }
 
@@ -71,7 +71,7 @@ func TestPrepend(t *testing.T) {
 	}
 
 	if tail != thirdExpected {
-		t.Errorf("in tail got %v, wanted %v", first, thirdExpected)
+		t.Errorf("in tail got %v, wanted %v", tail, thirdExpected)
 	}
 }
 
@@ -86,5 +86,37 @@ func TestLength(t *testing.T) {
 
 	if length != 3 {
 		t.Errorf("got length %v, wanted %v", length, 3)
+	}
+}
+
+func TestDelete(t *testing.T) {
+	list := LinkedList{}
+
+	list.Append(10)
+	list.Append(20)
+	list.Append(30)
+	list.Delete(20)
+
+	first := list.Head.Value
+	second := list.Head.Next.Value
+	end := list.Head.Next.Next
+	tail := list.Tail.Value
+
+	firstExpected := 10
+	if first != firstExpected {
+		t.Errorf("in first node got %v, wanted %v", first, firstExpected)
+	}
+
+	secondExpected := 30
+	if second != secondExpected {
+		t.Errorf("in second node got %v, wanted %v", second, secondExpected)
+	}
+
+	if end != nil {
+		t.Errorf("in end got %v, wanted %v", end, nil)
+	}
+
+	if tail != secondExpected {
+		t.Errorf("in tail got %v, wanted %v", tail, secondExpected)
 	}
 }
