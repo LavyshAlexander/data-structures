@@ -47,8 +47,14 @@ func (l *DoublyLinkedList) Delete(value int) bool {
 	}
 
 	if node.Value == value {
-		l.Head = node.Next
-		node.Previous = nil
+		if l.Head == l.Tail {
+			l.Head = nil
+			l.Tail = nil
+		} else {
+			l.Head = node.Next
+			node.Previous = nil
+		}
+
 		return true
 	}
 
