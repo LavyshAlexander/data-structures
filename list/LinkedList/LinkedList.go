@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+// [T]
 type LinkedListNode struct {
 	Value int
 	Next  *LinkedListNode

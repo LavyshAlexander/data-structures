@@ -1,3 +1,3 @@
 module github.com/LavyshAlexander/data-structures
 
-go 1.17
+go 1.18
