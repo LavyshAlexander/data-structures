@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-// [T]
+// [T] with constrains
 type LinkedListNode struct {
 	Value int
 	Next  *LinkedListNode
