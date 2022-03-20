@@ -4,19 +4,18 @@ import (
 	"fmt"
 )
 
-// [T] with constrains
-type LinkedListNode struct {
-	Value int
-	Next  *LinkedListNode
+type LinkedListNode[T comparable] struct {
+	Value T
+	Next  *LinkedListNode[T]
 }
 
-type LinkedList struct {
-	Head *LinkedListNode
-	Tail *LinkedListNode
+type LinkedList[T comparable] struct {
+	Head *LinkedListNode[T]
+	Tail *LinkedListNode[T]
 }
 
-func (l *LinkedList) Append(value int) {
-	node := &LinkedListNode{Value: value}
+func (l *LinkedList[T]) Append(value T) {
+	node := &LinkedListNode[T]{Value: value}
 
 	if l.Head == nil {
 		l.Head = node
@@ -29,8 +28,8 @@ func (l *LinkedList) Append(value int) {
 	l.Tail = node
 }
 
-func (l *LinkedList) Prepend(value int) {
-	node := &LinkedListNode{Value: value}
+func (l *LinkedList[T]) Prepend(value T) {
+	node := &LinkedListNode[T]{Value: value}
 
 	node.Next = l.Head
 	l.Head = node
@@ -40,7 +39,7 @@ func (l *LinkedList) Prepend(value int) {
 	}
 }
 
-func (l *LinkedList) Delete(value int) bool {
+func (l *LinkedList[T]) Delete(value T) bool {
 	node := l.Head
 
 	if node == nil {
@@ -73,7 +72,7 @@ func (l *LinkedList) Delete(value int) bool {
 	return false
 }
 
-func (l *LinkedList) Exist(value int) bool {
+func (l *LinkedList[T]) Exist(value T) bool {
 	node := l.Head
 
 	for node != nil {
@@ -87,7 +86,7 @@ func (l *LinkedList) Exist(value int) bool {
 	return false
 }
 
-func (l *LinkedList) Length() int {
+func (l *LinkedList[T]) Length() int {
 	node := l.Head
 	length := 0
 
@@ -99,7 +98,7 @@ func (l *LinkedList) Length() int {
 	return length
 }
 
-func (l *LinkedList) String() string {
+func (l *LinkedList[T]) String() string {
 	if l.Head == nil {
 		return "[]"
 	}

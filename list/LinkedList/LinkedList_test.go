@@ -5,7 +5,7 @@ import (
 )
 
 func TestAppend(t *testing.T) {
-	list := LinkedList{}
+	list := LinkedList[int]{}
 
 	list.Append(10)
 	list.Append(20)
@@ -39,7 +39,7 @@ func TestAppend(t *testing.T) {
 }
 
 func TestPrepend(t *testing.T) {
-	list := LinkedList{}
+	list := LinkedList[int]{}
 
 	list.Prepend(10)
 	list.Prepend(20)
@@ -76,7 +76,7 @@ func TestPrepend(t *testing.T) {
 }
 
 func TestLength(t *testing.T) {
-	list := LinkedList{}
+	list := LinkedList[int]{}
 
 	list.Append(10)
 	list.Append(20)
@@ -90,7 +90,7 @@ func TestLength(t *testing.T) {
 }
 
 func TestDelete(t *testing.T) {
-	list := LinkedList{}
+	list := LinkedList[int]{}
 
 	list.Append(10)
 	list.Append(20)
@@ -122,7 +122,7 @@ func TestDelete(t *testing.T) {
 }
 
 func TestDeleteSingleHead(t *testing.T) {
-	list := LinkedList{}
+	list := LinkedList[int]{}
 
 	list.Append(10)
 	list.Delete(10)
@@ -139,7 +139,7 @@ func TestDeleteSingleHead(t *testing.T) {
 }
 
 func TestExist(t *testing.T) {
-	list := LinkedList{}
+	list := LinkedList[int]{}
 
 	list.Append(10)
 	list.Append(20)
@@ -165,7 +165,7 @@ func TestExist(t *testing.T) {
 }
 
 func TestString(t *testing.T) {
-	list := LinkedList{}
+	list := LinkedList[int]{}
 
 	list.Append(10)
 	list.Append(20)
@@ -178,7 +178,7 @@ func TestString(t *testing.T) {
 		t.Errorf("got %v, wanted %v", stringValue, expectedString)
 	}
 
-	emptyString := LinkedList{}
+	emptyString := LinkedList[int]{}
 
 	stringValue = emptyString.String()
 	expectedString = "[]"
