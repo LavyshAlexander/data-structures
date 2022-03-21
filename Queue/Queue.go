@@ -1,39 +1,40 @@
 package Queue
 
 import (
-	"github.com/LavyshAlexander/data-structures/DoublyLinkedList"
+	"github.com/LavyshAlexander/data-structures/LinkedList"
 )
 
 type Queue[T comparable] struct {
-	list *DoublyLinkedList.DoublyLinkedList[T]
+	list *LinkedList.LinkedList[T]
 }
 
-func (q *Queue[T]) Push(value T) {
+func (q *Queue[T]) Enqueue(value T) {
 	q.list.Append(value)
 }
 
-func (q *Queue[T]) Pop() (ret T) {
-	popped := q.list.Tail
+func (q *Queue[T]) Dequeue() (ret T) {
+	popped := q.list.Head
+
 	if popped != nil {
-		q.list.Tail = popped.Previous
+		q.list.Head = popped.Next
 		ret = popped.Value
 	}
 
 	return
 }
 
-func (s *Queue[T]) IsEmpty() bool {
-	return s.list.Head == nil
+func (q *Queue[T]) IsEmpty() bool {
+	return q.list.Head == nil
 }
 
-func (s *Queue[T]) Peek() T {
-	if s.IsEmpty() {
+func (q *Queue[T]) Peek() T {
+	if q.IsEmpty() {
 		return *new(T)
 	}
 
-	return s.list.Tail.Value
+	return q.list.Head.Value
 }
 
-func (s *Queue[T]) String() string {
-	return s.list.String()
+func (q *Queue[T]) String() string {
+	return q.list.String()
 }

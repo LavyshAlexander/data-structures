@@ -16,8 +16,8 @@ type Stack[T any] interface {
 }
 
 type Queue[T any] interface {
-	Push(value T)
-	Pop() T
+	Enqueue(value T)
+	Dequeue() T
 	IsEmpty() bool
 	Peek() T
 }
