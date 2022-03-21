@@ -114,3 +114,11 @@ func (l *LinkedList[T]) String() string {
 
 	return str
 }
+
+func (l *LinkedList[T]) PrintReverse() {
+	current := l.Head
+	for current != nil {
+		defer fmt.Println(current.Value)
+		current = current.Next
+	}
+}
