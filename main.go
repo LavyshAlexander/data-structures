@@ -1,6 +1,6 @@
 package main
 
-import "github.com/LavyshAlexander/data-structures/list/LinkedList"
+import "github.com/LavyshAlexander/data-structures/LinkedList"
 
 func main() {
 	l := LinkedList.LinkedList[int]{}
