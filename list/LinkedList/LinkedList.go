@@ -122,3 +122,15 @@ func (l *LinkedList[T]) PrintReverse() {
 		current = current.Next
 	}
 }
+
+func (l *LinkedList[T]) Reverse() *LinkedList[T] {
+	reversed := &LinkedList[T]{}
+
+	current := l.Head
+	for current != nil {
+		reversed.Prepend(current.Value)
+		current = current.Next
+	}
+
+	return reversed
+}

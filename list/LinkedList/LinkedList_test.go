@@ -187,3 +187,41 @@ func TestString(t *testing.T) {
 		t.Errorf("got %v, wanted %v", stringValue, expectedString)
 	}
 }
+
+func TestReverse(t *testing.T) {
+	list := LinkedList[int]{}
+
+	list.Append(10)
+	list.Append(20)
+	list.Append(30)
+	reversed := list.Reverse()
+
+	first := reversed.Head.Value
+	second := reversed.Head.Next.Value
+	third := reversed.Head.Next.Next.Value
+	end := reversed.Head.Next.Next.Next
+	tail := reversed.Tail.Value
+
+	firstExpected := 30
+	if first != firstExpected {
+		t.Errorf("in first node got %v, wanted %v", first, firstExpected)
+	}
+
+	secondExpected := 20
+	if second != secondExpected {
+		t.Errorf("in second node got %v, wanted %v", second, secondExpected)
+	}
+
+	thirdExpected := 10
+	if third != thirdExpected {
+		t.Errorf("in third node got %v, wanted %v", third, thirdExpected)
+	}
+
+	if end != nil {
+		t.Errorf("in end got %v, wanted %v", end, nil)
+	}
+
+	if tail != thirdExpected {
+		t.Errorf("in tail got %v, wanted %v", tail, secondExpected)
+	}
+}
