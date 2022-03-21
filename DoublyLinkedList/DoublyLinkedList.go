@@ -2,19 +2,19 @@ package DoublyLinkedList
 
 import "fmt"
 
-type DoublyLinkedListNode struct {
-	Value    int
-	Previous *DoublyLinkedListNode
-	Next     *DoublyLinkedListNode
+type DoublyLinkedListNode[T comparable] struct {
+	Value    T
+	Previous *DoublyLinkedListNode[T]
+	Next     *DoublyLinkedListNode[T]
 }
 
-type DoublyLinkedList struct {
-	Head *DoublyLinkedListNode
-	Tail *DoublyLinkedListNode
+type DoublyLinkedList[T comparable] struct {
+	Head *DoublyLinkedListNode[T]
+	Tail *DoublyLinkedListNode[T]
 }
 
-func (l *DoublyLinkedList) Append(value int) {
-	node := &DoublyLinkedListNode{Value: value}
+func (l *DoublyLinkedList[T]) Append(value T) {
+	node := &DoublyLinkedListNode[T]{Value: value}
 
 	if l.Head == nil {
 		l.Head = node
@@ -26,8 +26,8 @@ func (l *DoublyLinkedList) Append(value int) {
 	}
 }
 
-func (l *DoublyLinkedList) Prepend(value int) {
-	node := &DoublyLinkedListNode{Value: value}
+func (l *DoublyLinkedList[T]) Prepend(value T) {
+	node := &DoublyLinkedListNode[T]{Value: value}
 
 	if l.Head == nil {
 		l.Head = node
@@ -39,7 +39,7 @@ func (l *DoublyLinkedList) Prepend(value int) {
 	}
 }
 
-func (l *DoublyLinkedList) Delete(value int) bool {
+func (l *DoublyLinkedList[T]) Delete(value T) bool {
 	node := l.Head
 
 	if node == nil {
@@ -73,7 +73,7 @@ func (l *DoublyLinkedList) Delete(value int) bool {
 	return false
 }
 
-func (l *DoublyLinkedList) Exist(value int) bool {
+func (l *DoublyLinkedList[T]) Exist(value T) bool {
 	node := l.Head
 
 	for node != nil {
@@ -87,7 +87,7 @@ func (l *DoublyLinkedList) Exist(value int) bool {
 	return false
 }
 
-func (l *DoublyLinkedList) Length() int {
+func (l *DoublyLinkedList[T]) Length() int {
 	length := 0
 	node := l.Head
 
@@ -99,7 +99,7 @@ func (l *DoublyLinkedList) Length() int {
 	return length
 }
 
-func (l *DoublyLinkedList) String() string {
+func (l *DoublyLinkedList[T]) String() string {
 	if l.Head == nil {
 		return "[]"
 	}

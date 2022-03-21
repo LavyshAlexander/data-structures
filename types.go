@@ -14,3 +14,10 @@ type Stack[T any] interface {
 	IsEmpty() bool
 	Peek() T
 }
+
+type Queue[T any] interface {
+	Push(value T)
+	Pop() T
+	IsEmpty() bool
+	Peek() T
+}
