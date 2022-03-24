@@ -4,6 +4,7 @@ import (
 	"github.com/LavyshAlexander/data-structures/LinkedList"
 )
 
+// Implement without LinkedList usage
 type Queue[T comparable] struct {
 	list *LinkedList.LinkedList[T]
 }
