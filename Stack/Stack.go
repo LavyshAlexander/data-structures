@@ -36,6 +36,7 @@ func (s *Stack[T]) Peek() T {
 func (s *Stack[T]) Push(value T) {
 	top := &Node[T]{value, s.top}
 	s.top = top
+	s.length++
 }
 
 func (s *Stack[T]) Pop() (ret T) {
@@ -43,6 +44,7 @@ func (s *Stack[T]) Pop() (ret T) {
 
 	if popped != nil {
 		s.top = popped.previous
+		s.length--
 		return popped.value
 	}
 
