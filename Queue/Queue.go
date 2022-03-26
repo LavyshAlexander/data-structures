@@ -15,6 +15,10 @@ func New[T comparable]() *Queue[T] {
 	return &Queue[T]{list: &LinkedList.LinkedList[T]{}}
 }
 
+func (q *Queue[T]) Length() int {
+	return q.list.Length()
+}
+
 func (q *Queue[T]) Enqueue(value T) {
 	q.list.Append(value)
 }
