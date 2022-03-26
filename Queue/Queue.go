@@ -5,8 +5,14 @@ import (
 )
 
 // Implement without LinkedList usage
-type Queue[T comparable] struct {
-	list *LinkedList.LinkedList[T]
+type (
+	Queue[T comparable] struct {
+		list *LinkedList.LinkedList[T]
+	}
+)
+
+func New[T comparable]() *Queue[T] {
+	return &Queue[T]{list: &LinkedList.LinkedList[T]{}}
 }
 
 func (q *Queue[T]) Enqueue(value T) {
