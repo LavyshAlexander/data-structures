@@ -39,13 +39,21 @@ func (q *Queue[T]) Enqueue(value T) {
 }
 
 func (q *Queue[T]) Dequeue() (ret T) {
-	dequeued := q.first
-
-	if dequeued != nil {
-		q.first = dequeued.next
-		ret = dequeued.value
+	if q.first == nil {
+		return
 	}
 
+	dequeued := q.first
+
+	if q.length == 1 {
+		q.first = nil
+		q.last = nil
+	} else {
+		q.first = dequeued.next
+	}
+
+	q.length--
+	ret = dequeued.value
 	return
 }
 

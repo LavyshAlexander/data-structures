@@ -19,6 +19,15 @@ func TestLength(t *testing.T) {
 	if actualLength != expectedLength {
 		t.Errorf("Equal length %v is not expected actual %v", actualLength, expectedLength)
 	}
+
+	q.Dequeue()
+
+	actualLength = q.Length()
+	expectedLength = 2
+
+	if actualLength != expectedLength {
+		t.Errorf("Equal length %v is not expected actual %v", actualLength, expectedLength)
+	}
 }
 
 func TestEnqueue(t *testing.T) {
@@ -61,6 +70,10 @@ func TestDenqueue(t *testing.T) {
 	last = q.Dequeue()
 	if last != 3 {
 		t.Error("Dequeued item on queue should be 3")
+	}
+
+	if q.first != nil || q.last != nil {
+		t.Errorf("Fully dequeued queue has not nilled pointers first - %v and last - %v", q.first, q.last)
 	}
 }
 
