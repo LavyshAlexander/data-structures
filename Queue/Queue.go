@@ -2,7 +2,6 @@ package Queue
 
 import "fmt"
 
-// Implement without LinkedList usage
 type (
 	Queue[T any] struct {
 		first  *Node[T]
