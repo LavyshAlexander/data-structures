@@ -1,41 +1,56 @@
 package Queue
 
-import (
-	"github.com/LavyshAlexander/data-structures/LinkedList"
-)
+import "fmt"
 
 // Implement without LinkedList usage
 type (
-	Queue[T comparable] struct {
-		list *LinkedList.LinkedList[T]
+	Queue[T any] struct {
+		first  *Node[T]
+		last   *Node[T]
+		length int
+	}
+
+	Node[T any] struct {
+		value T
+		next  *Node[T]
 	}
 )
 
 func New[T comparable]() *Queue[T] {
-	return &Queue[T]{list: &LinkedList.LinkedList[T]{}}
+	return &Queue[T]{}
 }
 
 func (q *Queue[T]) Length() int {
-	return q.list.Length()
+	return q.length
 }
 
 func (q *Queue[T]) Enqueue(value T) {
-	q.list.Append(value)
+	node := &Node[T]{value, nil}
+
+	if q.first == nil {
+		q.first = node
+		q.last = node
+	} else {
+		q.last.next = node
+		q.last = node
+	}
+
+	q.length++
 }
 
 func (q *Queue[T]) Dequeue() (ret T) {
-	popped := q.list.Head
+	dequeued := q.first
 
-	if popped != nil {
-		q.list.Head = popped.Next
-		ret = popped.Value
+	if dequeued != nil {
+		q.first = dequeued.next
+		ret = dequeued.value
 	}
 
 	return
 }
 
 func (q *Queue[T]) IsEmpty() bool {
-	return q.list.Head == nil
+	return q.length == 0
 }
 
 func (q *Queue[T]) Peek() T {
@@ -43,9 +58,21 @@ func (q *Queue[T]) Peek() T {
 		return *new(T)
 	}
 
-	return q.list.Head.Value
+	return q.first.value
 }
 
 func (q *Queue[T]) String() string {
-	return q.list.String()
+	if q.IsEmpty() {
+		return "[]"
+	}
+
+	str := "[ "
+	current := q.first
+	for current != nil {
+		str += fmt.Sprintf("%v ", current.value)
+		current = current.next
+	}
+	str += "]"
+
+	return str
 }

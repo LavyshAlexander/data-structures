@@ -26,7 +26,7 @@ func TestEnqueue(t *testing.T) {
 
 	firstEnqueue := 1
 	q.Enqueue(firstEnqueue)
-	topValue := q.list.Head.Value
+	topValue := q.first.value
 
 	if topValue != firstEnqueue {
 		t.Errorf("Top value %v is not equal %v", topValue, firstEnqueue)
@@ -34,7 +34,7 @@ func TestEnqueue(t *testing.T) {
 
 	secondEnqueue := 2
 	q.Enqueue(secondEnqueue)
-	topValue = q.list.Head.Value
+	topValue = q.first.value
 
 	if topValue != firstEnqueue {
 		t.Errorf("Top value %v is not equal %v", topValue, secondEnqueue)
