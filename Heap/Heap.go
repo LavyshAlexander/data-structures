@@ -9,7 +9,7 @@ type (
 	}
 
 	Heap[T any] struct {
-		size, capacity uint
+		size, capacity int
 		compare        Comparer[T]
 		items          []T
 	}
@@ -18,7 +18,7 @@ type (
 )
 
 func New[T any](compare Comparer[T]) *Heap[T] {
-	capacity := uint(10)
+	capacity := 10
 
 	return &Heap[T]{
 		size:     0,
@@ -28,11 +28,11 @@ func New[T any](compare Comparer[T]) *Heap[T] {
 	}
 }
 
-func (h *Heap[T]) Size() uint {
+func (h *Heap[T]) Size() int {
 	return h.size
 }
 
-func (h *Heap[T]) Capacity() uint {
+func (h *Heap[T]) Capacity() int {
 	return h.capacity
 }
 
@@ -47,3 +47,15 @@ func (h *Heap[T]) Poll() (result T) {
 func (h *Heap[T]) Add(value T) {
 
 }
+
+func (h *Heap[T]) getLeftChildIndex(index int) int  { return index*2 + 1 }
+func (h *Heap[T]) getRightChildIndex(index int) int { return index*2 + 2 }
+func (h *Heap[T]) getParentIndex(index int) int     { return (index - 1) / 2 }
+
+func (h *Heap[T]) hasLeftChild(index int) bool  { return h.getLeftChildIndex(index) < h.size }
+func (h *Heap[T]) hasRightChild(index int) bool { return h.getRightChildIndex(index) < h.size }
+func (h *Heap[T]) hasParent(index int) bool     { return h.getParentIndex(index) >= 0 }
+
+func (h *Heap[T]) leftChild(index int) T  { return h.items[h.getLeftChildIndex(index)] }
+func (h *Heap[T]) rightChild(index int) T { return h.items[h.getRightChildIndex(index)] }
+func (h *Heap[T]) parent(index int) T     { return h.items[h.getParentIndex(index)] }
