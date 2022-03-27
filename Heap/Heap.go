@@ -59,3 +59,14 @@ func (h *Heap[T]) hasParent(index int) bool     { return h.getParentIndex(index)
 func (h *Heap[T]) leftChild(index int) T  { return h.items[h.getLeftChildIndex(index)] }
 func (h *Heap[T]) rightChild(index int) T { return h.items[h.getRightChildIndex(index)] }
 func (h *Heap[T]) parent(index int) T     { return h.items[h.getParentIndex(index)] }
+
+func (h *Heap[T]) swap(leftIndex, rightIndex int) {
+	h.items[leftIndex], h.items[rightIndex] = h.items[rightIndex], h.items[leftIndex]
+}
+
+func (h *Heap[T]) ensureExtraCapacity() {
+	if h.size == h.capacity {
+		h.items = append(h.items, make([]T, h.capacity)...)
+		h.capacity *= 2
+	}
+}
