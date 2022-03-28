@@ -181,3 +181,22 @@ func TestEnsureExtraCapacity(t *testing.T) {
 		}
 	}
 }
+
+func TestPeek(t *testing.T) {
+	comparer := func(a, b int) bool { return a <= b }
+
+	h := New(comparer)
+
+	peeked := h.Peek()
+	if peeked != 0 {
+		t.Errorf("Peeked value %v is not equal to expected %v.", peeked, 0)
+	}
+
+	h.size = 10
+	h.items = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+
+	peeked = h.Peek()
+	if peeked != 1 {
+		t.Errorf("Peeked value %v is not equal to expected %v.", peeked, 0)
+	}
+}

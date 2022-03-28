@@ -36,15 +36,29 @@ func (h *Heap[T]) Capacity() int {
 	return h.capacity
 }
 
-func (h *Heap[T]) Peak() (result T) {
-	return
+func (h *Heap[T]) Peek() (result T) {
+	return h.items[0]
 }
 
 func (h *Heap[T]) Poll() (result T) {
-	return
+	item := h.items[0]
+	h.items[0] = h.items[h.size-1]
+	h.heapifyDown()
+	return item
 }
 
 func (h *Heap[T]) Add(value T) {
+	h.ensureExtraCapacity()
+	h.items[h.size] = value
+	h.size++
+	h.heapifyUp()
+}
+
+func (h *Heap[T]) heapifyDown() {
+
+}
+
+func (h *Heap[T]) heapifyUp() {
 
 }
 
