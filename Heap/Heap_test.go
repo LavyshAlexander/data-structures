@@ -139,3 +139,24 @@ func TestHeapGetNode(t *testing.T) {
 		t.Errorf("Parent has unexpected value %v, should be %v.", parent, 1)
 	}
 }
+
+func TestSwap(t *testing.T) {
+	comparer := func(a, b int) bool { return a <= b }
+
+	h := New(comparer)
+	h.size = 3
+	h.items = []int{1, 2, 3, 0, 0, 0, 0, 0, 0, 0}
+
+	first := h.items[1]
+	second := h.items[2]
+
+	h.swap(1, 2)
+
+	if first != h.items[2] {
+		t.Errorf("After swap first element has unexpected value %v, should be %v.", first, second)
+	}
+
+	if second != h.items[1] {
+		t.Errorf("After swap second element has unexpected value %v, should be %v.", second, first)
+	}
+}
