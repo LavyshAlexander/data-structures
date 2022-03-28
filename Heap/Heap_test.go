@@ -200,3 +200,24 @@ func TestPeek(t *testing.T) {
 		t.Errorf("Peeked value %v is not equal to expected %v.", peeked, 0)
 	}
 }
+
+func TestAdd(t *testing.T) {
+	comparer := func(a, b int) bool { return a < b }
+
+	h := New(comparer)
+	h.size = 4
+	h.items = []int{10, 15, 20, 17, 0, 0, 0, 0, 0, 0}
+	itemsExpected := []int{8, 10, 20, 17, 15, 0, 0, 0, 0, 0}
+
+	h.Add(8)
+
+	if h.size != 5 {
+		t.Errorf("After adding new element size %v didn't changed to %v.", h.size, 5)
+	}
+
+	for i, v := range h.items {
+		if v != itemsExpected[i] {
+			t.Errorf("Items has unexpected value %v instead of %v on index %d.", v, itemsExpected[i], i)
+		}
+	}
+}

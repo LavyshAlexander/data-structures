@@ -49,17 +49,31 @@ func (h *Heap[T]) Poll() (result T) {
 
 func (h *Heap[T]) Add(value T) {
 	h.ensureExtraCapacity()
+
 	h.items[h.size] = value
 	h.size++
+
 	h.heapifyUp()
 }
 
 func (h *Heap[T]) heapifyDown() {
+	index := 0
+	// parent := h.items[index]
+
+	if h.hasLeftChild(index) {
+
+	}
 
 }
 
 func (h *Heap[T]) heapifyUp() {
+	index := h.size - 1
 
+	for h.hasParent(index) && h.compare(h.items[index], h.parent(index)) {
+		parentIndex := h.getParentIndex(index)
+		h.swap(index, parentIndex)
+		index = parentIndex
+	}
 }
 
 func (h *Heap[T]) getLeftChildIndex(index int) int  { return index*2 + 1 }
