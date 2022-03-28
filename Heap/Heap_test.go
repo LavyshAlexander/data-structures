@@ -74,3 +74,68 @@ func TestHeapGetIndexes(t *testing.T) {
 		t.Errorf("Parent index calculated with error: %v, but expected %v", parentIndex, parentIndexExpexted)
 	}
 }
+
+func TestHeapHasIndexes(t *testing.T) {
+	comparer := func(a, b int) bool { return a <= b }
+
+	h := New(comparer)
+	h.size = 3
+
+	hasLeftChild := h.hasLeftChild(0)
+	if !hasLeftChild {
+		t.Error("Left child does not exist while should be.")
+	}
+
+	hasLeftChild = h.hasLeftChild(100)
+	if hasLeftChild {
+		t.Error("Left child does exist while should not be")
+	}
+
+	hasRightChild := h.hasRightChild(0)
+	if !hasRightChild {
+		t.Error("Right child does not exist while should be.")
+	}
+
+	hasRightChild = h.hasRightChild(100)
+	if hasRightChild {
+		t.Error("Right child does exist while should not be")
+	}
+
+	hasParent := h.hasParent(2)
+	if !hasParent {
+		t.Error("Parent does not exist while should be.")
+	}
+
+	hasParent = h.hasParent(0)
+	if hasLeftChild {
+		t.Error("Parent does exist while should not be")
+	}
+}
+
+func TestHeapGetNode(t *testing.T) {
+	comparer := func(a, b int) bool { return a <= b }
+
+	h := New(comparer)
+	h.size = 3
+	h.items = []int{1, 2, 3, 0, 0, 0, 0, 0, 0, 0}
+
+	leftChild := h.leftChild(0)
+	if leftChild != 2 {
+		t.Errorf("Left child has unexpected value %v, should be %v.", leftChild, 2)
+	}
+
+	rightChild := h.rightChild(0)
+	if rightChild != 3 {
+		t.Errorf("Right child has unexpected value %v, should be %v.", rightChild, 3)
+	}
+
+	parent := h.parent(1)
+	if parent != 1 {
+		t.Errorf("Parent has unexpected value %v, should be %v.", parent, 1)
+	}
+
+	parent = h.parent(2)
+	if parent != 1 {
+		t.Errorf("Parent has unexpected value %v, should be %v.", parent, 1)
+	}
+}
