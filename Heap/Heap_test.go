@@ -54,7 +54,7 @@ func TestHeapGetIndexes(t *testing.T) {
 	}
 
 	parentIndex := h.getParentIndex(0)
-	parentIndexExpexted := 0
+	parentIndexExpexted := -1
 
 	if parentIndex != parentIndexExpexted {
 		t.Errorf("Parent index calculated with error: %v, but expected %v", parentIndex, parentIndexExpexted)
@@ -213,6 +213,31 @@ func TestAdd(t *testing.T) {
 
 	if h.size != 5 {
 		t.Errorf("After adding new element size %v didn't changed to %v.", h.size, 5)
+	}
+
+	for i, v := range h.items {
+		if v != itemsExpected[i] {
+			t.Errorf("Items has unexpected value %v instead of %v on index %d.", v, itemsExpected[i], i)
+		}
+	}
+}
+
+func TestPoll(t *testing.T) {
+	comparer := func(a, b int) bool { return a < b }
+
+	h := New(comparer)
+	h.size = 7
+	h.items = []int{10, 15, 20, 17, 18, 22, 23, 0, 0, 0}
+	itemsExpected := []int{15, 17, 20, 23, 18, 22, 0, 0, 0, 0}
+
+	polled := h.Poll()
+
+	if polled != 10 {
+		t.Errorf("Polled element %v is not equal to expected %v.", polled, 10)
+	}
+
+	if h.size != 6 {
+		t.Errorf("After polling element size %v didn't changed to %v.", h.size, 6)
 	}
 
 	for i, v := range h.items {

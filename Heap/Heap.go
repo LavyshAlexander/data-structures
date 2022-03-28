@@ -41,10 +41,17 @@ func (h *Heap[T]) Peek() (result T) {
 }
 
 func (h *Heap[T]) Poll() (result T) {
-	item := h.items[0]
-	h.items[0] = h.items[h.size-1]
+	if h.size == 0 {
+		return
+	}
+
+	result = h.items[0]
+	h.size--
+	h.items[0] = h.items[h.size]
+	h.items[h.size] = *new(T)
 	h.heapifyDown()
-	return item
+
+	return
 }
 
 func (h *Heap[T]) Add(value T) {
@@ -58,12 +65,20 @@ func (h *Heap[T]) Add(value T) {
 
 func (h *Heap[T]) heapifyDown() {
 	index := 0
-	// parent := h.items[index]
 
-	if h.hasLeftChild(index) {
+	for h.hasLeftChild(index) {
+		childIndex := h.getLeftChildIndex(index)
+		if h.hasRightChild(index) && !h.compare(h.leftChild(index), h.rightChild(index)) {
+			childIndex = h.getRightChildIndex(index)
+		}
 
+		if !h.compare(h.items[index], h.items[childIndex]) {
+			h.swap(index, childIndex)
+			index = childIndex
+		} else {
+			break
+		}
 	}
-
 }
 
 func (h *Heap[T]) heapifyUp() {
@@ -78,7 +93,12 @@ func (h *Heap[T]) heapifyUp() {
 
 func (h *Heap[T]) getLeftChildIndex(index int) int  { return index*2 + 1 }
 func (h *Heap[T]) getRightChildIndex(index int) int { return index*2 + 2 }
-func (h *Heap[T]) getParentIndex(index int) int     { return (index - 1) / 2 }
+func (h *Heap[T]) getParentIndex(index int) int {
+	if index == 0 {
+		return -1
+	}
+	return (index - 1) / 2
+}
 
 func (h *Heap[T]) hasLeftChild(index int) bool  { return h.getLeftChildIndex(index) < h.size }
 func (h *Heap[T]) hasRightChild(index int) bool { return h.getRightChildIndex(index) < h.size }
