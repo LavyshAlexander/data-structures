@@ -160,3 +160,24 @@ func TestSwap(t *testing.T) {
 		t.Errorf("After swap second element has unexpected value %v, should be %v.", second, first)
 	}
 }
+
+func TestEnsureExtraCapacity(t *testing.T) {
+	comparer := func(a, b int) bool { return a <= b }
+
+	h := New(comparer)
+	h.size = 10
+	h.items = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	itemsExpected := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+
+	h.ensureExtraCapacity()
+
+	if h.capacity != 20 {
+		t.Errorf("Capacity value %v is not equal to expected %v.", h.capacity, 20)
+	}
+
+	for i, v := range h.items {
+		if v != itemsExpected[i] {
+			t.Errorf("Items has unexpected value %v instead of %v on index %d.", v, itemsExpected[i], i)
+		}
+	}
+}
