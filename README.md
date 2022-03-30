@@ -2,8 +2,8 @@
 
 ## TODO ##
 
-* PriorityQueue
 * HashTable
+* PriorityQueue
 * SkipList
 * Set
 
