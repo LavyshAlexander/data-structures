@@ -1,10 +1,13 @@
 package HashTable
 
+import "github.com/LavyshAlexander/data-structures/LinkedList"
+
 type (
-	HashTable struct {
+	HashTable[T comparable] struct {
+		table []LinkedList.LinkedList[T]
 	}
 )
 
-func New() *HashTable {
-	return &HashTable{}
+func New[T comparable]() *HashTable[T] {
+	return &HashTable[T]{table: make([]LinkedList.LinkedList[T], 0)}
 }
