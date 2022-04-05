@@ -11,3 +11,5 @@ type (
 func New[T comparable]() *HashTable[T] {
 	return &HashTable[T]{table: make([]LinkedList.LinkedList[T], 0)}
 }
+
+// TODO: Think of hash function, hash to index
